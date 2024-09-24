@@ -9,7 +9,6 @@ import {
   IconButton,
   Button,
   Badge,
-  Skeleton,
 } from "@chakra-ui/react";
 import { useSearchParams } from "next/navigation";
 import NextLink from "next/link";
@@ -31,7 +30,7 @@ export default function Page() {
   const [isLargerThan1000] = useMediaQuery("(min-width: 1000px)");
 
   return (
-    <Suspense fallback={<Skeleton />}>
+    <Suspense>
       <Flex flexDirection={isLargerThan1000 ? "row" : "column"}>
         <Flex
           justifyContent="center"

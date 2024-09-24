@@ -14,7 +14,7 @@ interface ChannelState {
 
 interface ChannelStoreState {
   channel: ChannelState;
-  setChannel: (channel) => void;
+  setChannel: (channel: ChannelState) => void;
 }
 
 const INITIAL_STATE: ChannelStoreState = {

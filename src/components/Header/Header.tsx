@@ -15,7 +15,7 @@ import { BiVideoPlus } from "react-icons/bi";
 import { BsBell } from "react-icons/bs";
 import { RxHamburgerMenu } from "react-icons/rx";
 
-export const Header = ({ onOpen }) => {
+export const Header = ({ onOpen }: {onOpen: () => void }) => {
   return (
     <Flex alignItems="center" justifyContent="space-between" marginLeft='20px'>
       <Flex>

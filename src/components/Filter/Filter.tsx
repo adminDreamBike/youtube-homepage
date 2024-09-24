@@ -9,8 +9,8 @@ export const Filter = () => {
   const videos = useVideoStore((state) => state.video);
   const setFilteredVideos = useVideoStore((state) => state.setFilteredVideos);
 
-  const [category, setCategory] = useState<any>();
-  const [activeButton, setActiveButton] = useState<any>();
+  const [category, setCategory] = useState([{}]);
+  const [activeButton, setActiveButton] = useState<string>();
 
   useEffect(() => {
     setCategory(getCategories());

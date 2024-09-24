@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Item } from "@/lib/types";
 import { create } from "zustand";
 
@@ -17,9 +18,9 @@ interface VideoStoreState {
 }
 
 interface Actions {
-  setVideos: (video) => void;
-  getVideoById: (id: string) => Item;
-  setFilteredVideos: (filteredVideos) => void;
+  setVideos: (video: VideoState) => void;
+  getVideoById: (id: string) => Item | undefined;
+  setFilteredVideos: (filteredVideos: any) => void;
 }
 
 const INITIAL_STATE: VideoStoreState = {
@@ -38,7 +39,7 @@ const INITIAL_STATE: VideoStoreState = {
 export const useVideoStore = create<VideoStoreState & Actions>((set, get) => ({
   video: INITIAL_STATE.video,
   setVideos: (video) => set(() => ({ video })),
-  getVideoById(id: string) {
+  getVideoById: (id: string) => {
     const { video } = get();
 
     const filteredVideo = video.items.find((item) => item.id === id);

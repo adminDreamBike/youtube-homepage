@@ -28,7 +28,13 @@ import { PiNewspaper } from "react-icons/pi";
 import { RxHamburgerMenu } from "react-icons/rx";
 import NextLink from "next/link";
 
-export const SideBar = ({ isOpen, onClose }) => {
+export const SideBar = ({
+  isOpen,
+  onClose,
+}: {
+  isOpen: boolean;
+  onClose: () => void;
+}) => {
   return (
     <>
       <Drawer

@@ -23,8 +23,9 @@ export default function Page() {
   const searchParams = useSearchParams();
   const videoId = searchParams.get("id") || "";
   const { getVideoById, video } = useVideoStore();
-  const { snippet, statistics } = getVideoById(videoId);
-  const { description, title, channelTitle } = snippet;
+  const videoById = getVideoById(videoId);
+  const snippetVideo = videoById?.snippet;
+  const statisticsVideo = videoById?.statistics;
   const [isLargerThan1000] = useMediaQuery("(min-width: 1000px)");
 
   return (
@@ -36,9 +37,9 @@ export default function Page() {
         w={{ base: "500px", md: "700px", lg: "1000px" }}
         margin="0 auto"
       >
-        <VideoPlayer videoId={videoId} title={title} />
+        <VideoPlayer videoId={videoId} title={snippetVideo?.title || ""} />
         <Text fontWeight="bold" fontSize="x-large" margin="12px 0">
-          {title}
+          {snippetVideo?.title || ""}
         </Text>
         <Flex
           flexDirection="row"
@@ -55,7 +56,7 @@ export default function Page() {
               />
             </Link>
             <Flex flexDirection="column">
-              <Text>{channelTitle}</Text>
+              <Text>{snippetVideo?.channelTitle}</Text>
               <Text fontSize="8px">5 K Suscriptores</Text>
             </Flex>
           </Flex>
@@ -73,7 +74,7 @@ export default function Page() {
             alignItems="center"
           >
             <Button rightIcon={<LuThumbsUp />} aria-label="thumbs up" size="sm">
-              {statistics.likeCount}
+              {videoById?.statistics.likeCount}
             </Button>
             <Button
               leftIcon={<LuThumbsDown />}
@@ -100,8 +101,8 @@ export default function Page() {
           overflow="hidden"
           textOverflow="ellipsis"
         >
-          {statistics.viewCount} visualizaciones <br />
-          {description}
+          {statisticsVideo?.viewCount || ""} visualizaciones <br />
+          {snippetVideo?.description}
         </Badge>
       </Flex>
       <Flex flexDirection="column" padding="10px 20px" gap="12px">

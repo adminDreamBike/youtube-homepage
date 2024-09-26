@@ -9,6 +9,7 @@ import { ThemeSwitcher } from "@/components/ThemeSwitcher/ThemeSwitcher";
 import { SideBar } from "@/components/SideBar/SideBar";
 import { Header } from "@/components/Header/Header";
 import { useDisclosure } from "@chakra-ui/react";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 export default function RootLayout({
   children,
@@ -23,13 +24,11 @@ export default function RootLayout({
         <ReactQueryProvider>
           <HydrationBoundary>
             <Header onOpen={onOpen} />
-            <SideBar
-              isOpen={isOpen}
-              onClose={onClose}
-            />
+            <SideBar isOpen={isOpen} onClose={onClose} />
             <ChakraUIProvider>{children}</ChakraUIProvider>
             <ThemeSwitcher />
           </HydrationBoundary>
+          <ReactQueryDevtools initialIsOpen={false} />
         </ReactQueryProvider>
       </body>
     </html>

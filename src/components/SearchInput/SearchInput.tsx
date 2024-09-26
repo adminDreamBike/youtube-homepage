@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { SearchIcon } from "@chakra-ui/icons";
 import {
@@ -14,11 +14,19 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 export const SearchInput = () => {
-  const [value, setValue] = useState('')
-  const router = useRouter()
+  const [value, setValue] = useState("");
+  const router = useRouter();
+  const handleSearchQuery = (event) => {
+    // event.preventDefault();
+
+    if (event?.type === "click" || event?.key === "Enter") {
+      router.push(`/results?q=${value}`);
+      setValue("");
+    }
+  };
   return (
     <StyledInputContainer>
-      <Flex height="40px">
+      <Flex height="40px" flexGrow="2">
         <InputGroup size="lg" marginRight="12px">
           <Input
             type="text"
@@ -26,6 +34,9 @@ export const SearchInput = () => {
             border="1px solid lightgray"
             height="40px"
             onChange={(event) => setValue(event.target.value)}
+            value={value}
+            onKeyDown={handleSearchQuery}
+            width="100%"
           />
           <InputRightElement
             width="3.5rem"
@@ -39,7 +50,7 @@ export const SearchInput = () => {
               icon={<SearchIcon />}
               color="gray"
               colorScheme="gray"
-              onClick={() => router.push(`/results?q=${value}`)}
+              onClick={handleSearchQuery}
             />
           </InputRightElement>
         </InputGroup>

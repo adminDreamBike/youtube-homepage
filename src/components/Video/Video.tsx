@@ -29,7 +29,7 @@ export const Video = ({
       flexDirection={isSuggested ? "row" : "column"}
       width={{ base: "500px", md: "460px" }}
     >
-      <Suspense fallback={<Skeleton isLoaded={!isLoading} />}>
+      <Suspense fallback={<Skeleton isLoaded={!isLoading}  />}>
         <VideoPlayer
           videoId={typeof id === "string" ? id : id?.videoId}
           title={snippet?.title}

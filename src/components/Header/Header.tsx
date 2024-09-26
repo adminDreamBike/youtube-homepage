@@ -15,11 +15,16 @@ import { BiVideoPlus } from "react-icons/bi";
 import { BsBell } from "react-icons/bs";
 import { RxHamburgerMenu } from "react-icons/rx";
 
-export const Header = ({ onOpen }: {onOpen: () => void }) => {
+export const Header = ({ onOpen }: { onOpen: () => void }) => {
   return (
-    <Flex alignItems="center" justifyContent="space-between" marginLeft='20px'>
+    <Flex
+      alignItems="center"
+      justifyContent="space-between"
+      marginLeft="20px"
+      gap="30px"
+    >
       <Flex>
-        <Wrap alignItems='center'>
+        <Wrap alignItems="center">
           <WrapItem>
             <IconButton
               colorScheme="blue"
@@ -27,7 +32,7 @@ export const Header = ({ onOpen }: {onOpen: () => void }) => {
               aria-label="button open drawer"
               icon={<RxHamburgerMenu />}
               size="lg"
-              fontSize="25px"              
+              fontSize="25px"
             />
           </WrapItem>
           <WrapItem>

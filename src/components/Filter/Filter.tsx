@@ -9,8 +9,8 @@ export const Filter = () => {
   const videos = useVideoStore((state) => state.video);
   const setFilteredVideos = useVideoStore((state) => state.setFilteredVideos);
 
-  const [category, setCategory] = useState([{}]);
-  const [activeButton, setActiveButton] = useState<string>();
+  const [category, setCategory] = useState<Array<{}>>([]);
+  const [activeButton, setActiveButton] = useState<string>("0");
 
   useEffect(() => {
     setCategory(getCategories());
@@ -27,6 +27,11 @@ export const Filter = () => {
     setFilteredVideos(newVideo);
   };
 
+  const handleClearFilters = () => {
+    setFilteredVideos(videos);
+    setActiveButton("0");
+  };
+
   return (
     <ButtonGroup
       spacing="4"
@@ -35,6 +40,13 @@ export const Filter = () => {
       justifyContent="center"
       gap="12px 0"
     >
+      <Button
+        className={activeButton === "0" ? "bg-black text-white" : ""}
+        onClick={handleClearFilters}
+        height="30px"
+      >
+        All
+      </Button>
       {category?.map((item) => {
         const keyItem = Object.keys(item).toString();
         return (

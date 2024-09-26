@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import { SearchIcon } from "@chakra-ui/icons";
@@ -16,7 +17,7 @@ import { useState } from "react";
 export const SearchInput = () => {
   const [value, setValue] = useState("");
   const router = useRouter();
-  const handleSearchQuery = (event) => {
+  const handleSearchQuery = (event: any) => {
     // event.preventDefault();
 
     if (event?.type === "click" || event?.key === "Enter") {

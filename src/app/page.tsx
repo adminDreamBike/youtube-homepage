@@ -1,4 +1,3 @@
-import { Filter } from "@/components/Filter/Filter";
 import { VideoList } from "@/components/VideoList/VideoList";
 
 export default function Home() {

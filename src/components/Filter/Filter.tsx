@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import { getCategories } from "@/lib/utils/utils";
@@ -5,11 +6,12 @@ import { useVideoStore } from "@/stores/videos";
 import { Button, ButtonGroup } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 
+
 export const Filter = () => {
   const videos = useVideoStore((state) => state.video);
   const setFilteredVideos = useVideoStore((state) => state.setFilteredVideos);
 
-  const [category, setCategory] = useState<Array<{}>>([]);
+  const [category, setCategory] = useState<Array<any>>([]);
   const [activeButton, setActiveButton] = useState<string>("0");
 
   useEffect(() => {

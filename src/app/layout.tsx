@@ -2,8 +2,8 @@
 
 import "./globals.css";
 import { fonts } from "./fonts";
-import { ChakraUIProvider } from "./providers/ChakraUIProvider";
-import ReactQueryProvider from "./providers/ReactQueryProvider";
+import { ChakraUIProvider } from "../providers/ChakraUIProvider";
+import ReactQueryProvider from "../providers/ReactQueryProvider";
 import { HydrationBoundary } from "@tanstack/react-query";
 import { ThemeSwitcher } from "@/components/ThemeSwitcher/ThemeSwitcher";
 import { SideBar } from "@/components/SideBar/SideBar";

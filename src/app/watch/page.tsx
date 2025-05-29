@@ -12,18 +12,19 @@ import {
 } from "@chakra-ui/react";
 import { useSearchParams } from "next/navigation";
 import NextLink from "next/link";
-import { useVideoStore } from "@/stores/videos";
 import { LuThumbsUp, LuThumbsDown } from "react-icons/lu";
 import { TiArrowForward } from "react-icons/ti";
 import { RxDotsHorizontal } from "react-icons/rx";
 import { Video } from "@/components/Video/Video";
 import { useMediaQuery } from "@chakra-ui/react";
 import { Suspense } from "react";
+import { useVideoActions, useVideos } from "@/stores/videos";
 
 export default function Page() {
   const searchParams = useSearchParams();
   const videoId = searchParams.get("id") || "";
-  const { getVideoById, video } = useVideoStore();
+  const { getVideoById } = useVideoActions();
+  const video = useVideos();
   const videoById = getVideoById(videoId);
   const snippetVideo = videoById?.snippet;
   const statisticsVideo = videoById?.statistics;

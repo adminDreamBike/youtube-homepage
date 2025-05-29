@@ -56,3 +56,4 @@ const useVideoStore = create<VideoStore>((set, get) => ({
 export const useFilteredVideos = () =>
   useVideoStore((state) => state.filteredVideos);
 export const useVideoActions = () => useVideoStore((state) => state.actions);
+export const useVideos = () => useVideoStore((state) => state.video);

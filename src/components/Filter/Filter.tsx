@@ -22,7 +22,7 @@ export const Filter = () => {
     const newVideo = {
       ...filteredVideos,
       items: [
-        filteredVideos.items.find((item) => item.snippet.categoryId === categoryId),
+        filteredVideos.items.find((item: any) => item.snippet.categoryId === categoryId),
       ],
     };
     setActiveButton(categoryId);

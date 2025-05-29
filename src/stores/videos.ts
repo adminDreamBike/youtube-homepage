@@ -14,13 +14,19 @@ interface VideoState {
 }
 interface VideoStoreState {
   video: VideoState;
-  filteredeVideo?: VideoState;
+  filteredVideos?: any;
 }
 
 interface Actions {
   setVideos: (video: VideoState) => void;
   getVideoById: (id: string) => Item | undefined;
   setFilteredVideos: (filteredVideos: any) => void;
+}
+
+export interface VideoStore {
+  video: VideoState;
+  filteredVideos?: any;
+  actions: Actions;
 }
 
 const INITIAL_STATE: VideoStoreState = {
@@ -34,18 +40,19 @@ const INITIAL_STATE: VideoStoreState = {
       resultsPerPage: 0,
     },
   },
+  filteredVideos: undefined,
 };
 
-export const useVideoStore = create<VideoStoreState & Actions>((set, get) => ({
+const useVideoStore = create<VideoStore>((set, get) => ({
   video: INITIAL_STATE.video,
-  setVideos: (video) => set(() => ({ video })),
-  getVideoById: (id: string) => {
-    const { video } = get();
-
-    const filteredVideo = video.items.find((item) => item.id === id);
-
-    return filteredVideo;
+  filteredVideos: INITIAL_STATE.filteredVideos,
+  actions: {
+    setVideos: (video) => set(() => ({ video })),
+    getVideoById: (id) => get().video.items.find((item) => item.id === id),
+    setFilteredVideos: (filteredVideos) => set({ filteredVideos }),
   },
-  filteredVideos: {},
-  setFilteredVideos: (filteredeVideo) => set(() => ({ filteredeVideo })),
 }));
+
+export const useFilteredVideos = () =>
+  useVideoStore((state) => state.filteredVideos);
+export const useVideoActions = () => useVideoStore((state) => state.actions);

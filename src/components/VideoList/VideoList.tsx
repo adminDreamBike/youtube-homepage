@@ -1,40 +1,44 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
-import { useVideoStore } from "@/stores/videos";
+import { useVideoActions, useFilteredVideos } from "@/stores/videos";
 import { Video } from "../Video/Video";
 import { useVideos } from "@/lib/queries/video";
 import { useEffect } from "react";
 import { StyledContainerVideos } from "./VideoList.styled";
 import { IVideo } from "@/lib/types";
-import { Flex, Text } from "@chakra-ui/react";
+import { Flex, Spinner, Text } from "@chakra-ui/react";
 import { BsCameraVideoOff } from "react-icons/bs";
 import { Filter } from "../Filter/Filter";
 
 export const VideoList = ({ url, q }: IVideo) => {
-  const { video, setVideos, filteredeVideo } = useVideoStore();
-  const { videos, isLoading, isError, error, refetch } = useVideos({
+  const { setVideos, } = useVideoActions();
+  const filteredVideos = useFilteredVideos();
+
+  const { videos, isLoading, isError, error, refetch, isSuccess } = useVideos({
     url: url,
     q: q,
   });
 
   useEffect(() => {
-    if (videos) {
-      setVideos(videos.data);
+    if (isSuccess) {
+      setVideos(videos?.data);
     }
-  }, [setVideos, videos]);
+  }, [setVideos, isSuccess, videos?.data]);
 
   useEffect(() => {
     refetch();
   }, [refetch]);
 
-  const currentVideos = filteredeVideo ? filteredeVideo : video;
+  const currentVideos = filteredVideos ? filteredVideos : videos?.data;
+  if (isLoading) return <Spinner size="xl" alignSelf="center" />
 
   return (
     <Flex flexDirection="column" gap="12px">
       {videos && <Filter />}
       <StyledContainerVideos>
         {isError && <Text fontSize="2xl">Error {error?.message} </Text>}
-        {!currentVideos.items[0] ? (
+        {!currentVideos?.items ? (
           <Flex alignItems="center">
             <Text fontSize="2xl" marginRight="14px" color="#ff9999">
               There is not videos to show
@@ -43,7 +47,7 @@ export const VideoList = ({ url, q }: IVideo) => {
             🥲
           </Flex>
         ) : (
-          currentVideos?.items?.map((item) => {
+          currentVideos?.items?.map((item: any) => {
             return (
               <Video
                 key={self.crypto.randomUUID()}

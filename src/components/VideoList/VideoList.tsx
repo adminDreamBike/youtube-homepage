@@ -12,10 +12,10 @@ import { BsCameraVideoOff } from "react-icons/bs";
 import { Filter } from "../Filter/Filter";
 
 export const VideoList = ({ url, q }: IVideo) => {
-  const { setVideos, } = useVideoActions();
+  const { setVideos } = useVideoActions();
   const filteredVideos = useFilteredVideos();
 
-  const { videos, isLoading, isError, error, refetch, isSuccess } = useVideos({
+  const { videos, isLoading, isError, error, isSuccess } = useVideos({
     url: url,
     q: q,
   });
@@ -26,19 +26,19 @@ export const VideoList = ({ url, q }: IVideo) => {
     }
   }, [setVideos, isSuccess, videos?.data]);
 
-  useEffect(() => {
-    refetch();
-  }, [refetch]);
-
   const currentVideos = filteredVideos ? filteredVideos : videos?.data;
-  if (isLoading) return <Spinner size="xl" alignSelf="center" />
+  if (isLoading) return <Spinner size="xl" alignSelf="center" />;
 
   return (
     <Flex flexDirection="column" gap="12px">
       {videos && <Filter />}
       <StyledContainerVideos>
-        {isError && <Text fontSize="2xl">Error {error?.message} </Text>}
-        {!currentVideos?.items ? (
+        {isError && (
+          <Text fontSize="2xl" color={"color.red"}>
+            Error {error?.message}{" "}
+          </Text>
+        )}
+        {!currentVideos?.items && !isError ? (
           <Flex alignItems="center">
             <Text fontSize="2xl" marginRight="14px" color="#ff9999">
               There is not videos to show

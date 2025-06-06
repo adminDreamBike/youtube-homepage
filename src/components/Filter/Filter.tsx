@@ -2,37 +2,15 @@
 "use client";
 
 import { getCategories } from "@/lib/utils/utils";
-import { useVideoActions, useFilteredVideos } from "@/stores/videos";
+import { useVideoActions } from "@/stores/videos";
 import { Button, ButtonGroup } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
-
+import { useState } from "react";
 
 export const Filter = () => {
-  const filteredVideos = useFilteredVideos();
-  const {setFilteredVideos} = useVideoActions();
+  const { setVideosByCategory } = useVideoActions();
 
-  const [category, setCategory] = useState<Array<any>>([]);
-  const [activeButton, setActiveButton] = useState<string>("0");
-
-  useEffect(() => {
-    setCategory(getCategories());
-  }, []);
-
-  const handleFilterVideo = (categoryId: string) => {
-    const newVideo = {
-      ...filteredVideos,
-      items: [
-        filteredVideos.items.find((item: any) => item.snippet.categoryId === categoryId),
-      ],
-    };
-    setActiveButton(categoryId);
-    setFilteredVideos(newVideo);
-  };
-
-  const handleClearFilters = () => {
-    setFilteredVideos(filteredVideos);
-    setActiveButton("0");
-  };
+  const [category] = useState<Array<any>>(getCategories());
+  const [activeButton] = useState<string>("0");
 
   return (
     <ButtonGroup
@@ -44,7 +22,7 @@ export const Filter = () => {
     >
       <Button
         className={activeButton === "0" ? "bg-black text-white" : ""}
-        onClick={handleClearFilters}
+        onClick={() => setVideosByCategory("all")}
         height="30px"
       >
         All
@@ -55,7 +33,7 @@ export const Filter = () => {
           <Button
             value={Object.keys(item)}
             key={keyItem}
-            onClick={(event) => handleFilterVideo(event.currentTarget.value)}
+            onClick={(event) => setVideosByCategory(event.currentTarget.value)}
             height="30px"
             className={activeButton === keyItem ? "bg-black text-white" : ""}
           >

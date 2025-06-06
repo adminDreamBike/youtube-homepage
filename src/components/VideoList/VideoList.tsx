@@ -26,7 +26,6 @@ export const VideoList = ({ url, q }: IVideo) => {
     }
   }, [setVideos, isSuccess, videos?.data]);
 
-  const currentVideos = filteredVideos ? filteredVideos : videos?.data;
   if (isLoading) return <Spinner size="xl" alignSelf="center" />;
 
   return (
@@ -38,16 +37,16 @@ export const VideoList = ({ url, q }: IVideo) => {
             Error {error?.message}{" "}
           </Text>
         )}
-        {!currentVideos?.items && !isError ? (
+        {filteredVideos?.length === 0 && !isError ? (
           <Flex alignItems="center">
             <Text fontSize="2xl" marginRight="14px" color="#ff9999">
-              There is not videos to show
+              No videos found for this category
             </Text>
             <BsCameraVideoOff fontSize="30px" color="#ff9999" />
             🥲
           </Flex>
         ) : (
-          currentVideos?.items?.map((item: any) => {
+          filteredVideos?.map((item: any) => {
             return (
               <Video
                 key={self.crypto.randomUUID()}

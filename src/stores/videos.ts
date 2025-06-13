@@ -18,6 +18,7 @@ interface Actions {
   setSelectedCategoryId: (selectedCategoryId: string) => void;
   setVideosByCategory: (categoryId: string) => void;
   clearFilters: () => void;
+  getChannelId: () => void;
 }
 
 export interface VideoStore {
@@ -25,6 +26,7 @@ export interface VideoStore {
   filteredVideosByCategory?: any;
   filteredVideos?: any;
   selectedCategoryId: string | null;
+  channelIds: string;
   actions: Actions;
 }
 
@@ -46,6 +48,7 @@ const useVideoStore = create<VideoStore>((set, get) => ({
   video: INITIAL_STATE.video,
   filteredVideosByCategory: null,
   selectedCategoryId: "all",
+  channelIds: "",
   actions: {
     setVideos: (video) => set(() => ({ video })),
     getVideoById: (id) => get().video.items.find((item) => item.id === id),
@@ -68,8 +71,15 @@ const useVideoStore = create<VideoStore>((set, get) => ({
         selectedCategoryId: categoryId,
       });
     },
+    getChannelId: () => {
+      const { video } = get();
+      const channelIds = video.items
+        .map((item) => item.snippet.channelId)
+        .join(",");
+      set({ channelIds });
+    },
     clearFilters: () =>
-      set({ filteredVideos: null, selectedCategoryId: "all" }),
+      set({ filteredVideos: null, selectedCategoryId: "all", channelIds: "" }),
   },
 }));
 
@@ -84,3 +94,4 @@ export const useSelectedCategoryId = () =>
   useVideoStore((state) => state.selectedCategoryId);
 export const useVideoActions = () => useVideoStore((state) => state.actions);
 export const useVideos = () => useVideoStore((state) => state.video);
+export const useChannelIds = () => useVideoStore((state) => state.channelIds);

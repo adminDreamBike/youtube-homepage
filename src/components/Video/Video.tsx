@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import {
@@ -17,19 +18,22 @@ export const Video = ({
   video,
   isLoading,
   isSuggested = false,
+  channels,
 }: {
   video: Item;
   isLoading?: boolean;
   isSuggested?: boolean;
+  channels: any;
 }) => {
   const { id, snippet, statistics } = video || {};
-
+  console.log('channels',channels)
+  console.log('video',video)
   return (
     <Flex
       flexDirection={isSuggested ? "row" : "column"}
       width={{ base: "500px", md: "460px" }}
     >
-      <Suspense fallback={<Skeleton isLoaded={!isLoading}  />}>
+      <Suspense fallback={<Skeleton isLoaded={!isLoading} />}>
         <VideoPlayer
           videoId={typeof id === "string" ? id : id?.videoId}
           title={snippet?.title}
@@ -40,12 +44,14 @@ export const Video = ({
         {!isSuggested && (
           <SkeletonCircle size="10" isLoaded={!isLoading}>
             <Link as={NextLink} href="https://www.youtube.com/@cbssportsgolazo">
-              <Image
-                src="https://yt3.ggpht.com/EKBT19BrrkDkhoxOjenonvDxIf0s4wDljOnCzPos7z3qAbmwA_cgNCDY_a1i_K_3dhH1BWmknQ=s240-c-k-c0x00ffffff-no-rj"
-                alt="image channel"
-                borderRadius="full"
-                boxSize="45px"
-              />
+              {channels && (
+                <Image
+                  src={channels?.snippet?.thumbnails?.default?.url}
+                  alt="image channel"
+                  borderRadius="full"
+                  boxSize="45px"
+                />
+              )}
             </Link>
           </SkeletonCircle>
         )}

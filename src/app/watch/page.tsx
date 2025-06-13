@@ -122,6 +122,7 @@ export default function Page() {
                 key={self.crypto.randomUUID()}
                 video={item}
                 isSuggested={true}
+                channels={null}
               />
             );
           })}

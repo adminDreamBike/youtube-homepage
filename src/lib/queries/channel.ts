@@ -1,11 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
 import { searchChannel } from "@/lib/api/channel";
 
-export const useChannel = ({ channelId }: { channelId: number }) => {
-  const { data, refetch } = useQuery({
+export const useChannel = ({ channelId }: { channelId: string }) => {
+  const { data, isSuccess } = useQuery({
     queryKey: ["channels", channelId],
-    queryFn: () => searchChannel({ channelId }),
+    queryFn: () => searchChannel({ channelId })
   });
 
-  return { channels: data, refetch };
+  return { channels: data?.data?.items, isSuccess };
 };

@@ -26,8 +26,6 @@ export const Video = ({
   channels: any;
 }) => {
   const { id, snippet, statistics } = video || {};
-  console.log('channels',channels)
-  console.log('video',video)
   return (
     <Flex
       flexDirection={isSuggested ? "row" : "column"}

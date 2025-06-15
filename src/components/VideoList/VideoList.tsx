@@ -27,13 +27,6 @@ export const VideoList = ({ url, q }: IVideo) => {
   });
   const { channels = {}} = useChannel({ channelId: channelIds });
 
-  const data = {
-    channels: [{ ...channels }],
-    videos: [{ ...filteredVideos }],
-  };
-
-  console.log("videoWithChannels", data);
-
   useEffect(() => {
     if (isSuccess) {
       setVideos(videos?.data);

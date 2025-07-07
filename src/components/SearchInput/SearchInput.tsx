@@ -18,7 +18,10 @@ export const SearchInput = () => {
   const [value, setValue] = useState("");
   const router = useRouter();
   const handleSearchQuery = (event: any) => {
-    // event.preventDefault();
+
+    if (value.length === 0) {
+      return;
+    }
 
     if (event?.type === "click" || event?.key === "Enter") {
       router.push(`/results?q=${value}`);

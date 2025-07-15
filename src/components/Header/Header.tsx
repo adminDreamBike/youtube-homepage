@@ -11,7 +11,6 @@ import {
 import { FaYoutube } from "react-icons/fa6";
 import { SearchInput } from "../SearchInput/SearchInput";
 import NextLink from "next/link";
-import { BiVideoPlus } from "react-icons/bi";
 import { BsBell } from "react-icons/bs";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { HiOutlinePlus } from "react-icons/hi2";

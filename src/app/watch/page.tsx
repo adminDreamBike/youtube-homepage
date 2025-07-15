@@ -13,7 +13,6 @@ import {
 import { useSearchParams } from "next/navigation";
 import NextLink from "next/link";
 import { LuThumbsUp, LuThumbsDown } from "react-icons/lu";
-import { TiArrowForward } from "react-icons/ti";
 
 import { PiDotsThree, PiShareFatLight } from "react-icons/pi";
 import { Video } from "@/components/Video/Video";

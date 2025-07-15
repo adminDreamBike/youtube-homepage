@@ -11,21 +11,21 @@ import {
 import { FaYoutube } from "react-icons/fa6";
 import { SearchInput } from "../SearchInput/SearchInput";
 import NextLink from "next/link";
-import { BiVideoPlus } from "react-icons/bi";
 import { BsBell } from "react-icons/bs";
 import { RxHamburgerMenu } from "react-icons/rx";
+import { HiOutlinePlus } from "react-icons/hi2";
 
 export const Header = ({ onOpen }: { onOpen: () => void }) => {
   return (
     <Flex
       alignItems="center"
       justifyContent="space-between"
-      marginLeft="20px"
+      padding="0 20px"
       gap="30px"
     >
       <Flex>
         <Wrap alignItems="center">
-          <WrapItem>
+          <WrapItem alignSelf="center">
             <IconButton
               colorScheme="blue"
               onClick={onOpen}
@@ -37,8 +37,8 @@ export const Header = ({ onOpen }: { onOpen: () => void }) => {
           </WrapItem>
           <WrapItem>
             <Link href="/" as={NextLink} alignItems="center" display="flex">
-              <Icon as={FaYoutube} boxSize={26} color="#ff0000" />
-              <Text>Youtube</Text>
+              <Icon as={FaYoutube} boxSize={30} color="#ff0000" />
+              <Text fontWeight="bold" fontSize="20px">Youtube</Text>
             </Link>
           </WrapItem>
         </Wrap>
@@ -49,10 +49,10 @@ export const Header = ({ onOpen }: { onOpen: () => void }) => {
           colorScheme="blue"
           onClick={onOpen}
           aria-label="post new video"
-          icon={<BiVideoPlus />}
+          icon={<HiOutlinePlus />}
           size="lg"
           fontSize="25px"
-          margin="20px"
+          margin="20px"          
         />
         <IconButton
           colorScheme="blue"
@@ -69,6 +69,7 @@ export const Header = ({ onOpen }: { onOpen: () => void }) => {
             name="Dan Abrahmov"
             src="https://bit.ly/dan-abramov"
             width="3rem"
+            borderRadius="100px"
           />
         </Link>
       </Flex>

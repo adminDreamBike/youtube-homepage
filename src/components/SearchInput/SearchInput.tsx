@@ -41,13 +41,15 @@ export const SearchInput = () => {
             value={value}
             onKeyDown={handleSearchQuery}
             width="100%"
+            padding="20px"
+            rounded={10}
           />
           <InputRightElement
             width="3.5rem"
             background="lightgray"
             position="absolute"
-            // right="80px"
-            height="40px"
+            rounded={10}
+            height="42px"
           >
             <IconButton
               aria-label="Search database"

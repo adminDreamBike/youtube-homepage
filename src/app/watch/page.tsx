@@ -13,8 +13,8 @@ import {
 import { useSearchParams } from "next/navigation";
 import NextLink from "next/link";
 import { LuThumbsUp, LuThumbsDown } from "react-icons/lu";
-import { TiArrowForward } from "react-icons/ti";
-import { RxDotsHorizontal } from "react-icons/rx";
+
+import { PiDotsThree, PiShareFatLight } from "react-icons/pi";
 import { Video } from "@/components/Video/Video";
 import { useMediaQuery } from "@chakra-ui/react";
 import { Suspense } from "react";
@@ -37,8 +37,10 @@ export default function Page() {
           justifyContent="center"
           flexDirection="column"
           padding="10px 20px"
-          w={{ base: "500px", md: "700px", lg: "1000px" }}
-          margin="0 auto"
+          // w={{ md: "700px", lg: "1000px" }}
+          w={{ base: "100%", md: "700px", lg: "1000px" }}
+          margin="0"
+          alignSelf="flex-start"
         >
           <VideoPlayer videoId={videoId} title={snippetVideo?.title || ""} />
           <Text fontWeight="bold" fontSize="x-large" margin="12px 0">
@@ -91,12 +93,12 @@ export default function Page() {
                 aria-label="thumbs down"
                 size="sm"
               />
-              <IconButton as={TiArrowForward} aria-label="share">
+              <IconButton as={PiShareFatLight} aria-label="share" size="xs" rounded="full" >
                 Compartir
               </IconButton>
               <IconButton
                 aria-label="more options button"
-                as={RxDotsHorizontal}
+                as={PiDotsThree}
                 isRound={true}
               />
             </Flex>
@@ -115,7 +117,12 @@ export default function Page() {
             {snippetVideo?.description}
           </Badge>
         </Flex>
-        <Flex flexDirection="column" padding="10px 20px" gap="12px">
+        <Flex
+          flexDirection="column"
+          padding="10px 20px"
+          gap="12px"
+          w={{ base: "100%", md: "400px", lg: "500px" }}
+        >
           {video?.items.map((item) => {
             return (
               <Video

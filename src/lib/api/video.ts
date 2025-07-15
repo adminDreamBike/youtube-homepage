@@ -17,7 +17,7 @@ export const fetchVideo = async ({
         key: "AIzaSyBrIu3zYBXZb4gJMdPmywCS-hFA1ESy590",
         part: withStatistics,
         chart: "mostPopular",
-        maxResults: 15,
+        maxResults: 25,
         q: q,
         type: type,
       },

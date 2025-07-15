@@ -26,15 +26,17 @@ export const Video = ({
   channels: any;
 }) => {
   const { id, snippet, statistics } = video || {};
+
   return (
     <Flex
-      flexDirection={isSuggested ? "row" : "column"}
-      width={{ base: "500px", md: "460px" }}
+      flexDirection={{ base: "column", lg: isSuggested ? "row" : "column" }}
+      gap="12px"
     >
       <Suspense fallback={<Skeleton isLoaded={!isLoading} />}>
         <VideoPlayer
           videoId={typeof id === "string" ? id : id?.videoId}
           title={snippet?.title}
+          width={isSuggested ? "100%" : "-webkit-fill-available"}
         />
       </Suspense>
 

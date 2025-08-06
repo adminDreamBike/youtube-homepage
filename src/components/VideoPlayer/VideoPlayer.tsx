@@ -10,7 +10,7 @@ export const VideoPlayer = ({
   width?: string;
 }) => {
   return (
-    <AspectRatio ratio={2 / 1} width={width}>
+    <AspectRatio width={width}>
       <Box
         as="iframe"
         title={title}

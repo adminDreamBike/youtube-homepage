@@ -1,7 +1,8 @@
-import axios, { AxiosError } from "axios";
+import { AxiosError } from "axios";
 import { TypeVideo } from "../types";
+import apiClient from "./apiClient";
 
-export const fetchVideo = async ({
+export const getVideo = async ({
   url,
   q,
   type = "video",
@@ -11,16 +12,18 @@ export const fetchVideo = async ({
   type?: TypeVideo;
 }) => {
   const withStatistics = q ? "snippet" : "id, statistics, snippet";
+  const params = {
+    key: "AIzaSyBrIu3zYBXZb4gJMdPmywCS-hFA1ESy590",
+    part: withStatistics,
+    chart: "mostPopular",
+    maxResults: 25,
+    q: q,
+    type: type,
+  };
+  
   try {
-    const response = axios.get(url, {
-      params: {
-        key: "AIzaSyBrIu3zYBXZb4gJMdPmywCS-hFA1ESy590",
-        part: withStatistics,
-        chart: "mostPopular",
-        maxResults: 25,
-        q: q,
-        type: type,
-      },
+    const response = apiClient.get(url, {
+      params: params,
     });
     return response;
   } catch (error) {

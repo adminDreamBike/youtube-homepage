@@ -22,7 +22,7 @@ export const Filter = () => {
     }
   };
   return (
-    <HStack gap='0'>
+    <HStack gap='0' justifyContent='center'>
       <IconButton
         onClick={() => handleNav("prev")}
         aria-label="prev"
@@ -40,6 +40,7 @@ export const Filter = () => {
         ref={buttonRef}
         width={{ base: "320px", md: "670px", lg: "1280px" }}
         overflowX="hidden"
+        flexGrow={2}
       >
         <Button
           className={activeButton === "0" ? "bg-black text-white" : ""}
